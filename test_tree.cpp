@@ -1,8 +1,13 @@
 
+#include <array>
 
 #include "octree.h"
 
-struct Object{};
+struct Object{
+
+    std::array<double, 6> BoundingBox() const { return {-10, -10, -10, 10, 10, 10}; }
+
+};
 
 int main() {
 

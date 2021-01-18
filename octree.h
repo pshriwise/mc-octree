@@ -32,7 +32,13 @@ template <class T>
   class Octree{
 
   public:
-  Octree(std::vector<T> objects) {};
+  Octree(std::vector<T> objects) {
+
+    for (const auto& object : objects) {
+      auto bbox = object.BoundingBox();
+    }
+
+  };
 
   };
 
