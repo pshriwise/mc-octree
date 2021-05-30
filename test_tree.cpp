@@ -1,5 +1,7 @@
 
+#include <cassert>
 #include <array>
+#include <memory>
 
 #include "octree.h"
 
@@ -13,7 +15,10 @@ int main() {
 
 std::vector<Object> objects(10);
 
-mcoct::Octree<Object> tree(objects);
+auto tree = std::make_unique<mcoct::Octree<Object>>(objects);
+
+assert(tree->tree_box_.contains({0.0, 0.0, 0.0}));
 
 return 0;
+
 }
