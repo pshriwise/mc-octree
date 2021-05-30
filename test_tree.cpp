@@ -17,7 +17,7 @@ std::vector<Object> objects(10);
 
 auto tree = std::make_unique<mcoct::Octree<Object>>(objects);
 
-assert(tree->tree_box_.contains({0.0, 0.0, 0.0}));
+assert(tree->tree_box().contains({0.0, 0.0, 0.0}));
 
 return 0;
 
