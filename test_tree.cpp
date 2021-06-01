@@ -7,13 +7,23 @@
 
 struct Object{
 
-    std::array<double, 6> BoundingBox() const { return {-10, -10, -10, 10, 10, 10}; }
+    Object(const std::array<double, 6>& bounds) : bounds_(bounds) {}
 
+    Object() {
+        bounds_ = {-10, -10, -10, 10, 10, 10};
+    }
+
+
+    std::array<double, 6> BoundingBox() const { return bounds_; }
+
+    std::array<double, 6> bounds_;
 };
 
 int main() {
 
 std::vector<Object> objects(10);
+
+
 
 auto tree = std::make_unique<mcoct::Octree<Object>>(objects);
 
