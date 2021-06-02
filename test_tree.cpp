@@ -21,13 +21,14 @@ struct TestObject{
 
 int main() {
 
-std::vector<TestObject> objects(10);
 
-
+std::vector<TestObject> objects;
+objects.push_back(TestObject({-5.0, -5.0, -5.0, 5.0, 5.0, 5.0}));
 
 auto tree = std::make_unique<mcoct::Octree<TestObject>>(objects);
 
 assert(tree->tree_box().contains({0.0, 0.0, 0.0}));
+assert(!tree->tree_box().contains({6.0, 0.0, 0.0}));
 
 return 0;
 

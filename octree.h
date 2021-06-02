@@ -56,10 +56,7 @@ struct BoundingBox {
   //! \param pnt location to check
   //! \return true if the point is in the box, false if not.
   bool contains(std::array<double, 3> pnt) {
-    return
-    min_[0] <= pnt[0] && max_[0] >= pnt[0] ||
-    min_[1] <= pnt[1] && max_[1] >= pnt[1] ||
-    min_[2] <= pnt[2] && max_[2] >= pnt[2];
+    return this->contains(pnt.data());
   }
 
   //! \brief Check if a point, \p pnt,  is contained by the box
@@ -67,8 +64,8 @@ struct BoundingBox {
   //! \return true if the point is in the box, false if not.
   bool contains(double pnt[3]) const {
     return
-    min_[0] <= pnt[0] && max_[0] >= pnt[0] ||
-    min_[1] <= pnt[1] && max_[1] >= pnt[1] ||
+    min_[0] <= pnt[0] && max_[0] >= pnt[0] &&
+    min_[1] <= pnt[1] && max_[1] >= pnt[1] &&
     min_[2] <= pnt[2] && max_[2] >= pnt[2];
   }
 
