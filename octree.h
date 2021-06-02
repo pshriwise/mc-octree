@@ -1,4 +1,6 @@
+#pragma once
 
+#include <array>
 #include <limits>
 #include <vector>
 
@@ -88,6 +90,10 @@ class Octree{
     }
 
   };
+
+  // methods
+  void build();
+
 
   // accessor methods
 
