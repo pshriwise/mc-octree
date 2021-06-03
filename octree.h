@@ -3,6 +3,8 @@
 #include <array>
 #include <limits>
 #include <vector>
+#include <set>
+#include <unordered_map>
 
 namespace mcoct {
 
@@ -75,6 +77,27 @@ struct BoundingBox {
   double max_[3]; //!< upper-right corner of the box
 };
 
+struct OctNode {
+  static uint64_t id;
+
+  OctNode() : id_(id++) {};
+
+  // methods
+  bool operator==(const OctNode& other) const { return other.id_ == this->id_; }
+
+
+  // data members
+  uint64_t id_;
+};
+
+// initialize OctNode static ID
+uint64_t OctNode::id = 1;
+
+struct OctNodeHash {
+  std::size_t operator()(const OctNode& node) const {
+    return node.id_;
+  }
+};
 
 /*! Generic Octree class used to rapidly locate objects in space */
 template <class T>
@@ -94,16 +117,18 @@ class Octree{
   // methods
   void build();
 
-
   // accessor methods
 
   //! \brief Retrieve the global bounding box for the tree's objects
   const BoundingBox& tree_box() const { return tree_box_; }
   BoundingBox& tree_box() { return tree_box_; }
 
+
+
   private:
 
   BoundingBox tree_box_; //!< Global bounding box for the tree. Updated as objects are added/removed.
+  std::unordered_map<OctNode, std::set<T>, OctNodeHash> stored_nodes_;
 
   };
 
